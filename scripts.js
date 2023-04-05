@@ -6,7 +6,7 @@ const rines=[
     "cantidad": 0
   },
   {
-    "codigo": 333,
+    "codigo": "333",
     "titulo": "l",
     "precio": 50,
     "cantidad": 0
@@ -19,7 +19,16 @@ var botones=document.getElementsByClassName("agregar");
 
 for (var i = 0; i < botones.length; i++){
   botones[i].addEventListener("click", function(){
-
+    const boton = botones[i];
+    const contenedor = boton.closest(".contenedor");
+    
+    const codigo="";
+    
+    const titulo="";
+    
+    const precio=0;
+    
+    const cantidad=0;
   })
 }
 
