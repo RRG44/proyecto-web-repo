@@ -1,4 +1,4 @@
-
+//TODO: Hacer que se guarde en un archivo local 
 var carrito=[]; //Va a guardar los productos
 var productos=0; //Va a llevar cuenta de la cantidad de productos en el carrito
 
@@ -60,6 +60,7 @@ botones.forEach(boton =>{
     }
     
     actualizarNumProductos(); //Para actualizar el número en el carrito al añadir productos
+    // crearCajasCarrito(); //Para crear cajas de productos en el html carrito
     console.log(Array.from(carrito));
     console.log(productos);
   });
@@ -69,4 +70,28 @@ botones.forEach(boton =>{
 function actualizarNumProductos(){
   var numProductos=document.querySelector("#etiquetaCarrito");
   numProductos.innerHTML=productos;
+}
+
+function crearCajasCarrito(){
+  html="";
+  //Creamos las cajitas con la información guardada
+  carrito.forEach((rin)=> {
+    html=html+`
+    <div class="contenedor">
+      <div class="izquierda">
+        <img src="img/Modelos/Offroad/RT107/1.png" alt=""></img>
+        <h3 class="modelo">${rin.modelo}</h3>
+        <p class="tipo">${rin.tipo}</p>
+        <p class="precio">${rin.precio}</p>
+        <p class="codigo">${rin.codigo}</p>
+      </div>
+      <div class="derecha">
+        <button class="menos">-</button>
+        <p>Cantidad: ${rin.cantidad}</p>
+        <button class="mas">+</button>
+        <button class="eliminar">Eliminar del carrito</button>
+      </div>
+    </div>
+    `;
+  });
 }
