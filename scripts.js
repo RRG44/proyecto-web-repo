@@ -1,6 +1,6 @@
 //TODO: Hacer que se guarde en un archivo local 
-var carrito=[]; //Va a guardar los productos
-var productos=0; //Va a llevar cuenta de la cantidad de productos en el carrito
+// var carrito=[]; //Va a guardar los productos
+// var productos=0; //Va a llevar cuenta de la cantidad de productos en el carrito
 
 
 //Recuperamos todos los botones del documento
@@ -10,6 +10,17 @@ var botones=document.querySelectorAll(".agregar");
 botones.forEach(boton =>{
   boton.addEventListener("click", () => {
     
+    carritoGuardado=localStorage.getItem("carritoLocal"); //revisamos el caché
+    productosGuardado=localStorage.getItem("productosLocal"); //revisamos el caché
+
+    if(carritoGuardado==null){
+      var carrito=[];
+      var productos=0;
+    }else{
+      carrito=JSON.parse(carritoGuardado); //vamos a conseguir el arreglo previo convertir de JSON a notas
+      productos=JSON.parse(productosGuardado);
+    }
+
     //Buscamos el contenedor donde está el botón
     var contenedor = boton.closest(".contenedor");
     
@@ -59,8 +70,10 @@ botones.forEach(boton =>{
       productos++;
     }
     
-    actualizarNumProductos(); //Para actualizar el número en el carrito al añadir productos
     // crearCajasCarrito(); //Para crear cajas de productos en el html carrito
+    localStorage.setItem("carritoLocal", JSON.stringify(carrito));
+    localStorage.setItem("productosLocal", JSON.stringify(productos));
+    actualizarNumProductos(); //Para actualizar el número en el carrito al añadir productos
     console.log(Array.from(carrito));
     console.log(productos);
   });
@@ -68,6 +81,15 @@ botones.forEach(boton =>{
 
 //
 function actualizarNumProductos(){
+  
+  productosGuardado=localStorage.getItem("productosLocal"); //revisamos el caché
+
+  if(productosGuardado==null){
+    var productos=0;
+  }else{
+    productos=JSON.parse(productosGuardado);
+  }
+
   var numProductos=document.querySelector("#etiquetaCarrito");
   numProductos.innerHTML=productos;
 }
@@ -75,7 +97,7 @@ function actualizarNumProductos(){
 function crearCajasCarrito(){
   html="";
   //Creamos las cajitas con la información guardada
-  carrito.forEach((rin)=> {
+  carrito.forEach(rin => {
     html=html+`
     <div class="contenedor">
       <div class="izquierda">
