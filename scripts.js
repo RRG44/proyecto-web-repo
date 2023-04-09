@@ -1,7 +1,3 @@
-//TODO: Hacer que se guarde en un archivo local 
-// var carrito=[]; //Va a guardar los productos
-// var productos=0; //Va a llevar cuenta de la cantidad de productos en el carrito
-
 
 //Recuperamos todos los botones del documento
 var botones=document.querySelectorAll(".agregar");
@@ -60,14 +56,12 @@ botones.forEach(boton =>{
       y sumamos+1 a la cantidad de productosen el carrito
       */
       carrito.push(rin);
-      productos++;
     }else{
       /*
       Si está solo agregamos +1 a su cantidad
       y a la cuenta de productos en el carrito
       */
       carrito[index].cantidad++;
-      productos++;
     }
     
     // crearCajasCarrito(); //Para crear cajas de productos en el html carrito
@@ -81,13 +75,15 @@ botones.forEach(boton =>{
 
 //
 function actualizarNumProductos(){
+  carritoGuardado=localStorage.getItem("carritoLocal"); //revisamos el caché
+  var productos=0;
   
-  productosGuardado=localStorage.getItem("productosLocal"); //revisamos el caché
-
-  if(productosGuardado==null){
-    var productos=0;
-  }else{
-    productos=JSON.parse(productosGuardado);
+ 
+  if (carritoGuardado != null) {
+    carrito = JSON.parse(carritoGuardado); //vamos a conseguir el arreglo previo convertir de JSON a notas
+    carrito.forEach(rin => {
+      productos += rin.cantidad;
+    });
   }
 
   var numProductos=document.querySelector("#etiquetaCarrito");
@@ -95,25 +91,115 @@ function actualizarNumProductos(){
 }
 
 function crearCajasCarrito(){
-  html="";
-  //Creamos las cajitas con la información guardada
-  carrito.forEach(rin => {
-    html=html+`
-    <div class="contenedor">
-      <div class="izquierda">
-        <img src="img/Modelos/Offroad/RT107/1.png" alt=""></img>
-        <h3 class="modelo">${rin.modelo}</h3>
-        <p class="tipo">${rin.tipo}</p>
-        <p class="precio">${rin.precio}</p>
-        <p class="codigo">${rin.codigo}</p>
+
+  carritoGuardado=localStorage.getItem("carritoLocal"); //revisamos el caché
+  contendorPrincipal=document.querySelector("#caja-principal");
+
+  let cajas="";
+
+  if(carritoGuardado!=null){
+    carrito=JSON.parse(carritoGuardado); //vamos a conseguir el arreglo previo convertir de JSON a notas
+    
+    carrito.forEach(rin =>{
+
+      var rinCaja="";
+  
+      rinCaja+=`
+      <div class="contenedor">
+        <div class="izquierda">
+          <img src="img/Modelos/${rin.tipo}/${rin.modelo}/1.jpg" alt=""></img>
+          <h3 class="modelo">${rin.modelo}</h3>
+          <p class="tipo">${rin.tipo}</p>
+          <p class="precio">${rin.precio}</p>
+          <p class="codigo">${rin.codigo}</p>
+        </div>
+        <div class="derecha">
+          <button class="menos">-</button>
+          <p class="cantidad">Cantidad: ${rin.cantidad}</p>
+          <button class="mas">+</button>
+          <button class="eliminar">Eliminar del carrito</button>
+        </div>
       </div>
-      <div class="derecha">
-        <button class="menos">-</button>
-        <p>Cantidad: ${rin.cantidad}</p>
-        <button class="mas">+</button>
-        <button class="eliminar">Eliminar del carrito</button>
-      </div>
-    </div>
-    `;
+      `;
+      cajas+=rinCaja;
+    });
+  }
+  contendorPrincipal.innerHTML = "";
+  contendorPrincipal.innerHTML+=cajas;
+
+  //*PARA LOS BOTONES ELIMINAR
+  const botonesEliminar=document.querySelectorAll(".eliminar");
+
+  botonesEliminar.forEach(boton =>{
+    boton.addEventListener("click", ()=>{
+      carritoGuardado=localStorage.getItem("carritoLocal"); //revisamos el caché
+
+      carrito=JSON.parse(carritoGuardado); //vamos a conseguir el arreglo previo convertir de JSON a notas
+
+      //Buscamos el contenedor donde está el botón
+      var contenedor = boton.closest(".contenedor");
+        
+      //Vamos a recuperar la información de los productos con ayuda de etiquetas y el contendor
+      var codigo=contenedor.querySelector(".codigo").textContent;
+
+      for (let i=0; i< carrito.length; i++){
+        //si hay un producto con el mismo código cambiamos el estado a true y guardamos la posición
+        if(carrito[i].codigo==codigo) {
+          carrito.splice(i, 1);
+        }
+      }
+
+      localStorage.setItem("carritoLocal", JSON.stringify(carrito));
+      actualizarNumProductos();
+      crearCajasCarrito();
+      console.log("Producto eliminado");
+    });
+  });
+
+  //*PARA LOS BOTONES MÁS Y MENOS
+  const botonesMas=document.querySelectorAll(".mas");
+
+  botonesMas.forEach(boton =>{
+    boton.addEventListener("click", ()=>{
+
+      //Buscamos el contenedor donde está el botón
+      carritoGuardado=localStorage.getItem("carritoLocal"); //revisamos el caché
+      carrito=JSON.parse(carritoGuardado);
+      var contenedor = boton.closest(".contenedor");
+      var codigo=contenedor.querySelector(".codigo").textContent;
+      
+      for (let i=0; i< carrito.length; i++){
+        if(carrito[i].codigo==codigo) {
+          carrito[i].cantidad+=1;
+        }
+      }
+      localStorage.setItem("carritoLocal", JSON.stringify(carrito));
+      actualizarNumProductos();
+      crearCajasCarrito();
+      console.log("+1");
+    });
+  });
+
+  const botonesMenos=document.querySelectorAll(".menos");
+
+  botonesMenos.forEach(boton =>{
+    boton.addEventListener("click", ()=>{
+      
+      //Buscamos el contenedor donde está el botón
+      carritoGuardado=localStorage.getItem("carritoLocal"); //revisamos el caché
+      carrito=JSON.parse(carritoGuardado);
+      var contenedor = boton.closest(".contenedor");
+      var codigo=contenedor.querySelector(".codigo").textContent;
+      
+      for (let i=0; i< carrito.length; i++){
+        if(carrito[i].codigo==codigo && carrito[i].cantidad>1) {
+          carrito[i].cantidad-=1;
+        }
+      }
+      localStorage.setItem("carritoLocal", JSON.stringify(carrito));
+      actualizarNumProductos();
+      crearCajasCarrito();
+      console.log("-1");
+    });
   });
 }

@@ -10,17 +10,21 @@
   <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Gruppo" />
 </head>
 
-<body onload="crearCajasCarrito()">
+<body onload="crearCajasCarrito(); actualizarNumProductos()">
   <header id="cabeza">
     <!--ESCRIBE AQUÍ TU NOMBRE EN VEZ DE NOMBRE-->
-    <h1>OMAR</h1>
-    <div id="carrito">
-      <a href=""></a>
+    <p>OMAR</p>
+    <div id="carritoDiv">
+      <a href="carrito.html">
+        <p id="etiquetaCarrito">0</p>
+        <img src="img/carrito.png" alt="">
+      </a>
     </div>
   </header>
 
+  <h1>Tu carrito</h1>
   <div id="caja-principal">
-    <p>Mensaje</p>
+  
   </div>
 
   <footer id="pie">
