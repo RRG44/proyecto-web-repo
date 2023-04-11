@@ -88,7 +88,33 @@ function actualizarNumProductos(){
 
   var numProductos=document.querySelector("#etiquetaCarrito");
   numProductos.innerHTML=productos;
+  actualizarTotal();
 }
+
+
+//*ACTUALIZAR TOTAL
+
+function actualizarTotal(){
+
+  carritoGuardado=localStorage.getItem("carritoLocal"); //revisamos el caché
+  var precioFinal=0;
+
+  if(carritoGuardado!=null){
+    carrito = JSON.parse(carritoGuardado); //vamos a conseguir el arreglo previo convertir de JSON a notas
+    carrito.forEach(rin => {
+      precioFinal += rin.cantidad*rin.precio;
+    });
+  }else{
+    precioFinal=0;
+  }
+
+  var contendor=document.querySelector(".total");
+  var total=contendor.querySelector(".total-neto");
+
+  total.innerHTML="";
+  total.innerHTML="Total neto: $"+precioFinal;
+}
+
 
 function crearCajasCarrito(){
 
