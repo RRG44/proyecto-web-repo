@@ -84,6 +84,8 @@ function actualizarNumProductos(){
     carrito.forEach(rin => {
       productos += rin.cantidad;
     });
+  }else{
+    productos=0;
   }
 
   var numProductos=document.querySelector("#etiquetaCarrito");
@@ -115,6 +117,23 @@ function actualizarTotal(){
   total.innerHTML="Total neto: $"+precioFinal;
 }
 
+//*VACIAR CARRITO
+
+var eliminarCarrito=document.querySelector(".vaciar-carrito");
+
+eliminarCarrito.addEventListener("click", ()=>{
+  var carrito=[];
+  contendorPrincipal=document.querySelector("#caja-principal");
+
+  contendorPrincipal.innerHTML="";
+
+  localStorage.setItem("carritoLocal", JSON.stringify(carrito));
+  actualizarNumProductos();
+  actualizarTotal();
+});
+
+
+//*CREAR CAJAS EN EL CARRITO
 
 function crearCajasCarrito(){
 
@@ -152,6 +171,7 @@ function crearCajasCarrito(){
   }
   contendorPrincipal.innerHTML = "";
   contendorPrincipal.innerHTML+=cajas;
+  localStorage.setItem("carritoLocal", JSON.stringify(carrito));
 
   //*PARA LOS BOTONES ELIMINAR
   const botonesEliminar=document.querySelectorAll(".eliminar");
