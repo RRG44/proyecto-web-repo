@@ -1,150 +1,104 @@
+/*
+*NOTAS: 
+Al cargar la página se debe ejecutar la función crearCajasCarrito y actualizarNumProductos()
+*/
 
-//Recuperamos todos los botones del documento
-var botones=document.querySelectorAll(".agregar");
+/*
+*############################################################
+*FUNCIÓN PARA ACTUALIZAR EL NUMERO DE PRODUCTOS EN EL CARRITO
+*############################################################
+*/
 
-//Vamos a agregar una funció a todos los botones
-botones.forEach(boton =>{
-  boton.addEventListener("click", () => {
-    
-    carritoGuardado=localStorage.getItem("carritoLocal"); //revisamos el caché
-    productosGuardado=localStorage.getItem("productosLocal"); //revisamos el caché
-
-    if(carritoGuardado==null){
-      var carrito=[];
-      var productos=0;
-    }else{
-      carrito=JSON.parse(carritoGuardado); //vamos a conseguir el arreglo previo convertir de JSON a notas
-      productos=JSON.parse(productosGuardado);
-    }
-
-    //Buscamos el contenedor donde está el botón
-    var contenedor = boton.closest(".contenedor");
-    
-    //Vamos a recuperar la información de los productos con ayuda de etiquetas y el contendor
-    var codigo=contenedor.querySelector(".codigo").textContent;
-    var modelo=contenedor.querySelector(".modelo").textContent;
-    var tipo=contenedor.querySelector(".tipo").textContent;
-    var precio=contenedor.querySelector(".precio").textContent;
-    
-    //Creamos nuestro objeto
-    var rin={
-      codigo: codigo,
-      modelo: modelo,
-      tipo: tipo,
-      precio: precio,
-      cantidad: 1
-    };
-
-    //Vamos a buscar si ya hay un producto igual en el carrito
-
-    let rinEnCarrito=false; //asumimos que no
-    let index; //para guardar su posición en el array
-
-    if (carrito.length>0) {
-      for (let i=0; i< carrito.length; i++){
-        //si hay un producto con el mismo código cambiamos el estado a true y guardamos la posición
-        if(carrito[i].codigo==rin.codigo) {
-          rinEnCarrito=true;
-          index=i;
-        }        
-      }
-    }
-
-    if(rinEnCarrito==false){
-      /*
-      Si no está lo agregamos
-      y sumamos+1 a la cantidad de productosen el carrito
-      */
-      carrito.push(rin);
-    }else{
-      /*
-      Si está solo agregamos +1 a su cantidad
-      y a la cuenta de productos en el carrito
-      */
-      carrito[index].cantidad++;
-    }
-    
-    // crearCajasCarrito(); //Para crear cajas de productos en el html carrito
-    localStorage.setItem("carritoLocal", JSON.stringify(carrito));
-    localStorage.setItem("productosLocal", JSON.stringify(productos));
-    actualizarNumProductos(); //Para actualizar el número en el carrito al añadir productos
-    console.log(Array.from(carrito));
-    console.log(productos);
-  });
-});
-
-//
 function actualizarNumProductos(){
-  carritoGuardado=localStorage.getItem("carritoLocal"); //revisamos el caché
+  carritoGuardado=localStorage.getItem("carritoLocal"); 
   var productos=0;
   
- 
   if (carritoGuardado != null) {
-    carrito = JSON.parse(carritoGuardado); //vamos a conseguir el arreglo previo convertir de JSON a notas
+    carrito = JSON.parse(carritoGuardado);
+    //Sumamos las cantidades de cada uno de los porductos en el carrito
     carrito.forEach(rin => {
       productos += rin.cantidad;
     });
-  }else{
-    productos=0;
   }
 
+  //Actualizamos la cuenta en el html 
   var numProductos=document.querySelector("#etiquetaCarrito");
+  numProductos.innerHTML="";
   numProductos.innerHTML=productos;
-  actualizarTotal();
+  actualizarTotal(); //Actualizamos el precio en el carrito
 }
 
 
-//*ACTUALIZAR TOTAL
+/*
+*####################################################
+*FUNCIÓN PARA ACTUALIZAR EL PRECIO TOTAL DE LA COMPRA
+*####################################################
+*/
 
 function actualizarTotal(){
 
-  carritoGuardado=localStorage.getItem("carritoLocal"); //revisamos el caché
+  carritoGuardado=localStorage.getItem("carritoLocal");
   var precioFinal=0;
 
   if(carritoGuardado!=null){
-    carrito = JSON.parse(carritoGuardado); //vamos a conseguir el arreglo previo convertir de JSON a notas
+    carrito = JSON.parse(carritoGuardado);
+    /*
+    Calculamos el precio de la compra con ayuda de
+    la cantidad y precio de cada producto en el carrito
+    */
     carrito.forEach(rin => {
       precioFinal += rin.cantidad*rin.precio;
     });
-  }else{
-    precioFinal=0;
   }
 
+  //Actualizamos el html
   var contendor=document.querySelector(".total");
   var total=contendor.querySelector(".total-neto");
-
   total.innerHTML="";
   total.innerHTML="Total neto: $"+precioFinal;
 }
 
-//*VACIAR CARRITO
 
+/*
+*##############################
+*FUNCIÓN PARA VACIAR EL CARRITO
+*##############################
+*/
+
+//Al único boton lo llamamos y la agregamos una función
 var eliminarCarrito=document.querySelector(".vaciar-carrito");
-
 eliminarCarrito.addEventListener("click", ()=>{
+
   var carrito=[];
+
+  //Vaciamos el contenedor del html
   contendorPrincipal=document.querySelector("#caja-principal");
-
   contendorPrincipal.innerHTML="";
-
+  //Actualizamos el LS con un carrito vacío
   localStorage.setItem("carritoLocal", JSON.stringify(carrito));
+  //Actualizamos la cuenta de productos y el precio de la compra
   actualizarNumProductos();
   actualizarTotal();
 });
 
 
-//*CREAR CAJAS EN EL CARRITO
+/*
+*##################################################################
+*FUNCIÓN PARA CREAR LOS CONTENEDORES DE LOS PRODCUTOS EN EL CARRITO
+*##################################################################
+*/
 
 function crearCajasCarrito(){
 
-  carritoGuardado=localStorage.getItem("carritoLocal"); //revisamos el caché
+  carritoGuardado=localStorage.getItem("carritoLocal"); 
   contendorPrincipal=document.querySelector("#caja-principal");
 
-  let cajas="";
+  let cajas=""; //contien todas las cajas de los productos
 
   if(carritoGuardado!=null){
-    carrito=JSON.parse(carritoGuardado); //vamos a conseguir el arreglo previo convertir de JSON a notas
-    
+
+    //Para cada producto vamos a crear una caja personalizada
+    carrito=JSON.parse(carritoGuardado);
     carrito.forEach(rin =>{
 
       var rinCaja="";
@@ -166,21 +120,29 @@ function crearCajasCarrito(){
         </div>
       </div>
       `;
-      cajas+=rinCaja;
+      cajas+=rinCaja; //Agregamos la caja a la colección de cajas
     });
   }
+
+  //Actualizamos el html con las nuevas cajas
   contendorPrincipal.innerHTML = "";
   contendorPrincipal.innerHTML+=cajas;
   localStorage.setItem("carritoLocal", JSON.stringify(carrito));
+
+  /*
+  *----------------------------------------------------------
+  *A CADA BOTÓN DE LAS CAJAS CREADAS LES ASIGNAMOS SU FUNCION
+  *----------------------------------------------------------
+  */
 
   //*PARA LOS BOTONES ELIMINAR
   const botonesEliminar=document.querySelectorAll(".eliminar");
 
   botonesEliminar.forEach(boton =>{
     boton.addEventListener("click", ()=>{
-      carritoGuardado=localStorage.getItem("carritoLocal"); //revisamos el caché
+      carritoGuardado=localStorage.getItem("carritoLocal");
 
-      carrito=JSON.parse(carritoGuardado); //vamos a conseguir el arreglo previo convertir de JSON a notas
+      carrito=JSON.parse(carritoGuardado);
 
       //Buscamos el contenedor donde está el botón
       var contenedor = boton.closest(".contenedor");
@@ -189,12 +151,13 @@ function crearCajasCarrito(){
       var codigo=contenedor.querySelector(".codigo").textContent;
 
       for (let i=0; i< carrito.length; i++){
-        //si hay un producto con el mismo código cambiamos el estado a true y guardamos la posición
+        //si hay un producto con el mismo codigo lo eliminamos
         if(carrito[i].codigo==codigo) {
           carrito.splice(i, 1);
         }
       }
 
+      //Actualizamos el carrito, precio y html con el producto eliminado
       localStorage.setItem("carritoLocal", JSON.stringify(carrito));
       actualizarNumProductos();
       crearCajasCarrito();
@@ -202,23 +165,28 @@ function crearCajasCarrito(){
     });
   });
 
-  //*PARA LOS BOTONES MÁS Y MENOS
+  //*PARA LOS BOTONES MAS (AGREGAN OTRO PRODUCTO DEL MISMO TIPO AL CARRITO)
   const botonesMas=document.querySelectorAll(".mas");
 
   botonesMas.forEach(boton =>{
     boton.addEventListener("click", ()=>{
 
-      //Buscamos el contenedor donde está el botón
-      carritoGuardado=localStorage.getItem("carritoLocal"); //revisamos el caché
+      //Buscamos el contenedor donde está el botón y su codigo
+      carritoGuardado=localStorage.getItem("carritoLocal");
       carrito=JSON.parse(carritoGuardado);
+
       var contenedor = boton.closest(".contenedor");
+
       var codigo=contenedor.querySelector(".codigo").textContent;
       
       for (let i=0; i< carrito.length; i++){
+        //Buscamos el producto por código y aumentados su cantidad en el carrito
         if(carrito[i].codigo==codigo) {
           carrito[i].cantidad+=1;
         }
       }
+
+      //Actualizamos el carrito, precio y html con la nueva cantidad
       localStorage.setItem("carritoLocal", JSON.stringify(carrito));
       actualizarNumProductos();
       crearCajasCarrito();
@@ -226,6 +194,7 @@ function crearCajasCarrito(){
     });
   });
 
+  //*PARA LOS BOTONES MAS (AGREGAN OTRO PRODUCTO DEL MISMO TIPO AL CARRITO)
   const botonesMenos=document.querySelectorAll(".menos");
 
   botonesMenos.forEach(boton =>{
@@ -234,14 +203,20 @@ function crearCajasCarrito(){
       //Buscamos el contenedor donde está el botón
       carritoGuardado=localStorage.getItem("carritoLocal"); //revisamos el caché
       carrito=JSON.parse(carritoGuardado);
+
       var contenedor = boton.closest(".contenedor");
+
       var codigo=contenedor.querySelector(".codigo").textContent;
       
       for (let i=0; i< carrito.length; i++){
+        //Buscamos el producto por código y aumentados su cantidad en el carrito
+        //No podemos tener cantidades negativas de productos
         if(carrito[i].codigo==codigo && carrito[i].cantidad>1) {
           carrito[i].cantidad-=1;
         }
       }
+
+      //Actualizamos el carrito, precio y html con la nueva cantidad
       localStorage.setItem("carritoLocal", JSON.stringify(carrito));
       actualizarNumProductos();
       crearCajasCarrito();
