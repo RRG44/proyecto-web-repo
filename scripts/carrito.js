@@ -10,11 +10,11 @@ Al cargar la página se debe ejecutar la función crearCajasCarrito y actualizar
 */
 
 function actualizarNumProductos(){
-  carritoGuardado=localStorage.getItem("carritoLocal"); 
+  carritoLS=localStorage.getItem("carritoLocal"); 
   var productos=0;
   
-  if (carritoGuardado != null) {
-    carrito = JSON.parse(carritoGuardado);
+  if (carritoLS != null) {
+    carrito = JSON.parse(carritoLS);
     //Sumamos las cantidades de cada uno de los porductos en el carrito
     carrito.forEach(rin => {
       productos += rin.cantidad;
@@ -37,11 +37,11 @@ function actualizarNumProductos(){
 
 function actualizarTotal(){
 
-  carritoGuardado=localStorage.getItem("carritoLocal");
+  carritoLS=localStorage.getItem("carritoLocal");
   var precioFinal=0;
 
-  if(carritoGuardado!=null){
-    carrito = JSON.parse(carritoGuardado);
+  if(carritoLS!=null){
+    carrito = JSON.parse(carritoLS);
     /*
     Calculamos el precio de la compra con ayuda de
     la cantidad y precio de cada producto en el carrito
@@ -90,15 +90,15 @@ eliminarCarrito.addEventListener("click", ()=>{
 
 function crearCajasCarrito(){
 
-  carritoGuardado=localStorage.getItem("carritoLocal"); 
+  carritoLS=localStorage.getItem("carritoLocal"); 
   contendorPrincipal=document.querySelector("#caja-principal");
 
   let cajas=""; //contien todas las cajas de los productos
 
-  if(carritoGuardado!=null){
+  if(carritoLS!=null){
 
     //Para cada producto vamos a crear una caja personalizada
-    carrito=JSON.parse(carritoGuardado);
+    carrito=JSON.parse(carritoLS);
     carrito.forEach(rin =>{
 
       var rinCaja="";
@@ -140,9 +140,9 @@ function crearCajasCarrito(){
 
   botonesEliminar.forEach(boton =>{
     boton.addEventListener("click", ()=>{
-      carritoGuardado=localStorage.getItem("carritoLocal");
+      carritoLS=localStorage.getItem("carritoLocal");
 
-      carrito=JSON.parse(carritoGuardado);
+      carrito=JSON.parse(carritoLS);
 
       //Buscamos el contenedor donde está el botón
       var contenedor = boton.closest(".contenedor");
@@ -172,8 +172,8 @@ function crearCajasCarrito(){
     boton.addEventListener("click", ()=>{
 
       //Buscamos el contenedor donde está el botón y su codigo
-      carritoGuardado=localStorage.getItem("carritoLocal");
-      carrito=JSON.parse(carritoGuardado);
+      carritoLS=localStorage.getItem("carritoLocal");
+      carrito=JSON.parse(carritoLS);
 
       var contenedor = boton.closest(".contenedor");
 
@@ -201,8 +201,8 @@ function crearCajasCarrito(){
     boton.addEventListener("click", ()=>{
       
       //Buscamos el contenedor donde está el botón
-      carritoGuardado=localStorage.getItem("carritoLocal"); //revisamos el caché
-      carrito=JSON.parse(carritoGuardado);
+      carritoLS=localStorage.getItem("carritoLocal"); //revisamos el caché
+      carrito=JSON.parse(carritoLS);
 
       var contenedor = boton.closest(".contenedor");
 

@@ -31,13 +31,13 @@ var botones=document.querySelectorAll(".agregar");
 botones.forEach(boton =>{
   boton.addEventListener("click", () => {
     
-    carritoGuardado=localStorage.getItem("carritoLocal"); //revisamos el LS del 
+    carritoLS=localStorage.getItem("carritoLocal"); //revisamos el LS del 
 
     //Se revisa si existen o no para inicializarlos o convertirlo de string a objeto
-    if(carritoGuardado==null && productosGuardado!=null){
+    if(carritoLS==null && productosGuardado!=null){
       var carrito=[];
     }else{
-      carrito=JSON.parse(carritoGuardado);
+      carrito=JSON.parse(carritoLS);
     }
 
     //Buscamos el div de clase contenedor más cercano a donde está el botón
@@ -98,11 +98,11 @@ botones.forEach(boton =>{
 */
 
 function actualizarNumProductos(){
-  carritoGuardado=localStorage.getItem("carritoLocal"); 
+  carritoLS=localStorage.getItem("carritoLocal"); 
   var productos=0;
   
-  if (carritoGuardado != null) {
-    carrito = JSON.parse(carritoGuardado);
+  if (carritoLS != null) {
+    carrito = JSON.parse(carritoLS);
     //Sumamos las cantidades de cada uno de los porductos en el carrito
     carrito.forEach(rin => {
       productos += rin.cantidad;
