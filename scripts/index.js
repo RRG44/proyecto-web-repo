@@ -34,7 +34,7 @@ botones.forEach(boton =>{
     carritoLS=localStorage.getItem("carritoLocal"); //revisamos el LS del 
 
     //Se revisa si existen o no para inicializarlos o convertirlo de string a objeto
-    if(carritoLS==null && productosGuardado!=null){
+    if(carritoLS==null){
       var carrito=[];
     }else{
       carrito=JSON.parse(carritoLS);
