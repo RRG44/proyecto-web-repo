@@ -110,7 +110,7 @@ function actualizarNumProductos(){
   }
 
   //Actualizamos la cuenta en el html 
-  var numProductos=document.querySelector("#etiquetaCarrito");
+  var numProductos=document.querySelector("#numero");
   numProductos.innerHTML="";
   numProductos.innerHTML=productos;
 }
