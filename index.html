@@ -5,55 +5,402 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!--TODO: 1) Agregar icono 2)Cambiar el title-->
-  <title>Document</title>
-  <link rel="stylesheet" href="style.css">
+  <!-- Se ha cambiado el titulo y se ha agregado el icono -->
+  <title>DINOCOP</title>
+  <link rel="shortcut icon" href="./img/LogoCorto.png" type="image/x-icon">
+  <link rel="stylesheet" href="stylemain.css">
   <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Gruppo" />
 </head>
+<!-- Se han cambiado los id para poder utilizar Sass -->
 
 <body onload="actualizarNumProductos()">
+
   <header id="cabeza">
-    <!--ESCRIBE AQUÍ TU NOMBRE EN VEZ DE NOMBRE-->
-    <p>OMAR</p>
-    <div id="carritoDiv">
-      <a href="carrito.html">
-        <p id="etiquetaCarrito">0</p>
-        <img src="img/carrito.png" alt="">
+    <div id="cabezaprincipal">
+      <!-- Se han añadido los logos de la empresa los cuales son links a la pagina principal -->
+      <!-- SE LE HA DADO UN DISEÑO AL HEADER EL CUAL ES ESTATICO -->
+      <div id="cabezalogocorto">
+        <a href="index.html" id="cabezalogocortolink">
+          <img src="./img/LogoCorto.png" alt="Logo DC">
+        </a>
+      </div>
+      <a href="index.html" id="cabezalogocompleto">
+        <img src="./img/LogoCompleto.png" alt="Logo DINOCOP">
       </a>
+      <div id="cabezacarrito">
+        <a href="carrito.html" id="cabezacarritolink">
+          <p id="numero">0</p>
+          <img src="img/carrito.png" alt="Carrito de compras" id="cabezacarritoimagen">
+        </a>
+      </div>
+    </div>
+    <div id="cabezaslogan">
+      <span>EL ARMAMENTO PARA RODAR</span>
     </div>
   </header>
-  <h1>Nuestros productos</h1>
-  <div id="caja-principal">
-    <!--TODO: agregar los demás rines con el formato mostrado-->
-    <!--TODO: hacer que las imágenes de los rines cambien como el slide que hicimos en clase-->
-    <div class="contenedor">
-      <img src="img/Modelos/Offroad/RT107/1.jpg" alt=""></img>
-      <h3 class="modelo">RT107</h3>
-      <p class="tipo">Offroad</p>
-      <p class="precio">100</p>
-      <p class="codigo">123</p>
-      <p>Descripcion Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure quaerat repellat ut asperiores vitae!</p>
-      <button class="agregar">Agregar al carrito</button>
+
+  <div id="cajaprincipal">
+    <!-- SE HA CAMBIADO EL TITULO DE LA PAGINA -->
+    <h1 id="cajaprincipaltitulo">Nuestro catálogo</h1>
+    <!-- SE HA AÑADIDO UN NAV PARA CCEDER A LAS DIFERENTES SECCIONES -->
+    <div id="cajaprincipalindice">
+      <h3>Conoce nuestros modelos, encuentra tu estilo</h3>
+      <nav id="cajaprincipalsecciones">
+        <a href="#contenedorstreet" class="seccion" id="seccionstreet">
+          <div><span>Street</span></div>
+        </a>
+        <a href="#contenedorrace" class="seccion" id="seccionrace">
+          <div><span>Race</span></div>
+        </a>
+        <a href="#contenedoroffroad" class="seccion" id="seccionoffroad">
+          <div><span>Off-Road</span></div>
+        </a>
+      </nav>
     </div>
 
-    <div class="contenedor">
-      <img src="img/Modelos/Race/AERO/1.jpg" alt=""></img>
-      <h3 class="modelo">AERO</h3>
-      <p class="tipo">Race</p>
-      <p class="precio">20</p>
-      <p class="codigo">456</p>
-      <p>Descripcion Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure quaerat repellat ut asperiores vitae!</p>
-      <button class="agregar">Agregar al carrito</button>
+    <!-- AQUI COMIENZAN LAS SECCIONES DE STREET -->
+    <div class="cajaprincipalmodelo" id="contenedorstreet">
+      <div class="modeloencabezado" id="modelosstreet">
+        <span>Modelos Street</span>
+      </div>
+      <!-- PARA DAR FORMATO A LOS CONTENEDORES SE HAN COLOCADO LOS DATOS EN DISTINTOS DIVS -->
+      <div class="modelos">
+        <!-- SECCION DEL MODELO STREET 0110 -->
+        <div class="contenedor">
+          <div class="modelotitulo">
+            <p>Modelo:<span class="modelo">0110</span></p>
+          </div>
+          <div class="cuerpomodelo">
+            <div class="slidebotones">
+              <button class="anterior">
+                <img src="./img/angulo-izquierdo.png" alt="Anterior" id="anterior0110">
+              </button>
+              <div class="slide" id="slidestreet0110">
+                <img src="./img/Modelos/Street/0110/1.jpg" class="imagenslide" id="imagenslide0110">
+              </div>
+              <button class="siguiente">
+                <img src="./img/angulo-derecho.png" alt="Siguiente" id="siguiente0110">
+              </button>
+            </div>
+            <div class="cuerpoinformacion">
+              <div class="conceptos">
+                <p>Tipo:<span class="tipo">Street</span></p>
+                <p>Precio: MXN$<span class="precio">12000</span></p>
+                <p>Codigo:<span class="codigo">011012</span></p>
+                <span>Descripcion: <br> Medidas desde 18"-24" <br> Construido en 3 partes <br> Piezas de aluminio
+                  forjado</span>
+              </div>
+              <div class="modeloboton">
+                <button class="agregar">
+                  <img src="./img/carrito.png" alt="Carrito">
+                  <span>Agregar al carrito</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- SECCION DEL MODELO STREET 0221 -->
+        <div class="contenedor">
+          <div class="modelotitulo">
+            <p>Modelo:<span class="modelo">0221</span></p>
+          </div>
+          <div class="cuerpomodelo">
+            <div class="slidebotones">
+              <button class="anterior">
+                <img src="./img/angulo-izquierdo.png" alt="Anterior" id="anterior0221">
+              </button>
+              <div class="slide" id="slidestreet0221">
+                <img src="./img/Modelos/Street/0221/1.jpg" class="imagenslide" id="imagenslide0221">
+              </div>
+              <button class="siguiente">
+                <img src="./img/angulo-derecho.png" alt="Siguiente" id="siguiente0221">
+              </button>
+            </div>
+            <div class="cuerpoinformacion">
+              <div class="conceptos">
+                <p>Tipo:<span class="tipo">Street</span></p>
+                <p>Precio: MXN$<span class="precio">9000</span></p>
+                <p>Codigo:<span class="codigo">022109</span></p>
+                <span>Descripcion: <br> Medidas desde 18"-24" <br> Construido en 2 partes <br> Piezas de aluminio
+                  forjado</span>
+              </div>
+              <div class="modeloboton">
+                <button class="agregar">
+                  <img src="./img/carrito.png" alt="Carrito">
+                  <span>Agregar al carrito</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- SECCION DEL MODELO STREET 0441 -->
+        <div class="contenedor">
+          <div class="modelotitulo">
+            <p>Modelo:<span class="modelo">0441</span></p>
+          </div>
+          <div class="cuerpomodelo">
+            <div class="slidebotones">
+              <button class="anterior">
+                <img src="./img/angulo-izquierdo.png" alt="Anterior">
+              </button>
+              <div class="slide" id="slidestreet0441">
+                <img src="./img/Modelos/Street/0441/1.jpg" class="imagenslide">
+              </div>
+              <button class="siguiente">
+                <img src="./img/angulo-derecho.png" alt="Siguiente">
+              </button>
+            </div>
+            <div class="cuerpoinformacion">
+              <div class="conceptos">
+                <p>Tipo:<span class="tipo">Street</span></p>
+                <p>Precio: MXN$<span class="precio">15000</span></p>
+                <p>Codigo:<span class="codigo">044110</span></p>
+                <span>Descripcion: <br> Medidas desde 16"-20" <br> Construido en 3 partes <br> Piezas de aluminio
+                  forjado</span>
+              </div>
+              <div class="modeloboton">
+                <button class="agregar">
+                  <img src="./img/carrito.png" alt="Carrito">
+                  <span>Agregar al carrito</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    
+
+    <!-- AQUI COMIENZAN LAS SECCIONES DE RACE -->
+    <div class="cajaprincipalmodelo" id="contenedorrace">
+      <div class="modeloencabezado" id="modelosrace">
+        <span>Modelos Race</span>
+      </div>
+      <!-- PARA DAR FORMATO A LOS CONTENEDORES SE HAN COLOCADO LOS DATOS EN DISTINTOS DIVS -->
+      <div class="modelos">
+        <!-- SECCION DEL MODELO RACE AERO -->
+        <div class="contenedor">
+          <div class="modelotitulo">
+            <p>Modelo:<span class="modelo">AERO</span></p>
+          </div>
+          <div class="cuerpomodelo">
+            <div class="slidebotones">
+              <button class="anterior">
+                <img src="./img/angulo-izquierdo.png" alt="Anterior">
+              </button>
+              <div class="slide" id="slideraceAERO">
+                <img src="./img/Modelos/Race/AERO/1.jpg" class="imagenslide">
+              </div>
+              <button class="siguiente">
+                <img src="./img/angulo-derecho.png" alt="Siguiente">
+              </button>
+            </div>
+            <div class="cuerpoinformacion">
+              <div class="conceptos">
+                <p>Tipo:<span class="tipo">Race</span></p>
+                <p>Precio: MXN$<span class="precio">15000</span></p>
+                <p>Codigo:<span class="codigo">AERO15</span></p>
+                <span>Descripcion: <br> Medidas desde 14"-20" <br> Construido en 2 partes <br> Piezas de aluminio
+                  forjado</span>
+              </div>
+              <div class="modeloboton">
+                <button class="agregar">
+                  <img src="./img/carrito.png" alt="Carrito">
+                  <span>Agregar al carrito</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- SECCION DEL MODELO RACE H5H -->
+        <div class="contenedor">
+          <div class="modelotitulo">
+            <p>Modelo:<span class="modelo">H5H</span></p>
+          </div>
+          <div class="cuerpomodelo">
+            <div class="slidebotones">
+              <button class="anterior">
+                <img src="./img/angulo-izquierdo.png" alt="Anterior">
+              </button>
+              <div class="slide" id="slideraceH5H">
+                <img src="./img/Modelos/Race/H5H/1.jpg" class="imagenslide">
+              </div>
+              <button class="siguiente">
+                <img src="./img/angulo-derecho.png" alt="Siguiente">
+              </button>
+            </div>
+            <div class="cuerpoinformacion">
+              <div class="conceptos">
+                <p>Tipo:<span class="tipo">Race</span></p>
+                <p>Precio: MXN$<span class="precio">13000</span></p>
+                <p>Codigo:<span class="codigo">H5H13</span></p>
+                <span>Descripcion: <br> Medidas desde 14"-20" <br> Construido en 1 parte <br> Piezas de aluminio
+                  forjado</span>
+              </div>
+              <div class="modeloboton">
+                <button class="agregar">
+                  <img src="./img/carrito.png" alt="Carrito">
+                  <span>Agregar al carrito</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- SECCION DEL MODELO RACE HTL -->
+        <div class="contenedor">
+          <div class="modelotitulo">
+            <p>Modelo:<span class="modelo">HTL</span></p>
+          </div>
+          <div class="cuerpomodelo">
+            <div class="slidebotones">
+              <button class="anterior">
+                <img src="./img/angulo-izquierdo.png" alt="Anterior">
+              </button>
+              <div class="slide" id="slideraceHTL">
+                <img src="./img/Modelos/Race/HTL/1.jpg" class="imagenslide">
+              </div>
+              <button class="siguiente">
+                <img src="./img/angulo-derecho.png" alt="Siguiente">
+              </button>
+            </div>
+            <div class="cuerpoinformacion">
+              <div class="conceptos">
+                <p>Tipo:<span class="tipo">Race</span></p>
+                <p>Precio: MXN$<span class="precio">10000</span></p>
+                <p>Codigo:<span class="codigo">HTL10</span></p>
+                <span>Descripcion: <br> Medidas desde 16"-20" <br> Construido en 3 partes <br> Piezas de aluminio
+                  forjado</span>
+              </div>
+              <div class="modeloboton">
+                <button class="agregar">
+                  <img src="./img/carrito.png" alt="Carrito">
+                  <span>Agregar al carrito</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AQUI COMIENZAN LAS SECCIONES DE OFF-ROAD -->
+    <div class="cajaprincipalmodelo" id="contenedoroffroad">
+      <div class="modeloencabezado" id="modelosoffroad">
+        <span>Modelos Off-Road</span>
+      </div>
+      <!-- PARA DAR FORMATO A LOS CONTENEDORES SE HAN COLOCADO LOS DATOS EN DISTINTOS DIVS -->
+      <div class="modelos">
+        <!-- SECCION DEL MODELO OFF ROAD RT107 -->
+        <div class="contenedor">
+          <div class="modelotitulo">
+            <p>Modelo:<span class="modelo">RT107</span></p>
+          </div>
+          <div class="cuerpomodelo">
+            <div class="slidebotones">
+              <button class="anterior">
+                <img src="./img/angulo-izquierdo.png" alt="Anterior">
+              </button>
+              <div class="slide" id="slideoffroadRT107">
+                <img src="./img/Modelos/Offroad/RT107/1.jpg" class="imagenslide">
+              </div>
+              <button class="siguiente">
+                <img src="./img/angulo-derecho.png" alt="Siguiente">
+              </button>
+            </div>
+            <div class="cuerpoinformacion">
+              <div class="conceptos">
+                <p>Tipo:<span class="tipo">OffRoad</span></p>
+                <p>Precio: MXN$<span class="precio">12000</span></p>
+                <p>Codigo:<span class="codigo">RT10712</span></p>
+                <span>Descripcion: <br> Medidas desde 18"-24" <br> Construido en 3 partes <br> Piezas de aluminio
+                  forjado</span>
+              </div>
+              <div class="modeloboton">
+                <button class="agregar">
+                  <img src="./img/carrito.png" alt="Carrito">
+                  <span>Agregar al carrito</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- SECCION DEL MODELO OFF ROAD RT108 -->
+        <div class="contenedor">
+          <div class="modelotitulo">
+            <p>Modelo:<span class="modelo">RT108</span></p>
+          </div>
+          <div class="cuerpomodelo">
+            <div class="slidebotones">
+              <button class="anterior">
+                <img src="./img/angulo-izquierdo.png" alt="Anterior">
+              </button>
+              <div class="slide" id="slideoffroadRT108">
+                <img src="./img/Modelos/Offroad/RT108/1.jpg" class="imagenslide">
+              </div>
+              <button class="siguiente">
+                <img src="./img/angulo-derecho.png" alt="Siguiente">
+              </button>
+            </div>
+            <div class="cuerpoinformacion">
+              <div class="conceptos">
+                <p>Tipo:<span class="tipo">OffRoad</span></p>
+                <p>Precio: MXN$<span class="precio">9000</span></p>
+                <p>Codigo:<span class="codigo">RT10809</span></p>
+                <span>Descripcion: <br> Medidas desde 18"-24" <br> Construido en 2 partes <br> Piezas de aluminio
+                  forjado</span>
+              </div>
+              <div class="modeloboton">
+                <button class="agregar">
+                  <img src="./img/carrito.png" alt="Carrito">
+                  <span>Agregar al carrito</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- SECCION DEL MODELO OFF ROAD RT110 -->
+        <div class="contenedor">
+          <div class="modelotitulo">
+            <p>Modelo:<span class="modelo">RT110</span></p>
+          </div>
+          <div class="cuerpomodelo">
+            <div class="slidebotones">
+              <button class="anterior">
+                <img src="./img/angulo-izquierdo.png" alt="Anterior">
+              </button>
+              <div class="slide" id="slideoffroad110">
+                <img src="./img/Modelos/Offroad/RT110/1.jpg" class="imagenslide">
+              </div>
+              <button class="siguiente">
+                <img src="./img/angulo-derecho.png" alt="Siguiente">
+              </button>
+            </div>
+            <div class="cuerpoinformacion">
+              <div class="conceptos">
+                <p>Tipo:<span class="tipo">OffRoad</span></p>
+                <p>Precio: MXN$<span class="precio">12000</span></p>
+                <p>Codigo:<span class="codigo">RT11012</span></p>
+                <span>Descripcion: <br> Medidas desde 16"-20" <br> Construido en 3 partes <br> Piezas de aluminio
+                  forjado</span>
+              </div>
+              <div class="modeloboton">
+                <button class="agregar">
+                  <img src="./img/carrito.png" alt="Carrito">
+                  <span>Agregar al carrito</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <!--TODO: Realizar el footer-->
   <footer id="pie">
     <h2>Aquí va el footer</h2>
-  </footer>  
+  </footer>
 </body>
-
 <script src="scripts/index.js"></script>
 
 </html>
