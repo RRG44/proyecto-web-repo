@@ -19,7 +19,7 @@ LS: Local Storage
 
 
 //Recuperamos todos los botones de la clase agregar del documento
-var botones=document.querySelectorAll(".agregar");
+var botones = document.querySelectorAll(".agregar");
 
 /*
 *#########################################
@@ -28,29 +28,29 @@ var botones=document.querySelectorAll(".agregar");
 */
 
 //Agregamos la función a cada botón del tipo agregar
-botones.forEach(boton =>{
+botones.forEach(boton => {
   boton.addEventListener("click", () => {
-    
-    carritoLS=localStorage.getItem("carritoLocal"); //revisamos el LS del 
+
+    carritoLS = localStorage.getItem("carritoLocal"); //revisamos el LS del 
 
     //Se revisa si existen o no para inicializarlos o convertirlo de string a objeto
-    if(carritoLS==null){
-      var carrito=[];
-    }else{
-      carrito=JSON.parse(carritoLS);
+    if (carritoLS == null) {
+      var carrito = [];
+    } else {
+      carrito = JSON.parse(carritoLS);
     }
 
     //Buscamos el div de clase contenedor más cercano a donde está el botón
     var contenedor = boton.closest(".contenedor");
-    
+
     //Vamos a recuperar la información de los productos con ayuda de las clases y el contendor
-    var codigo=contenedor.querySelector(".codigo").textContent;
-    var modelo=contenedor.querySelector(".modelo").textContent;
-    var tipo=contenedor.querySelector(".tipo").textContent;
-    var precio=contenedor.querySelector(".precio").textContent;
-    
+    var codigo = contenedor.querySelector(".codigo").textContent;
+    var modelo = contenedor.querySelector(".modelo").textContent;
+    var tipo = contenedor.querySelector(".tipo").textContent;
+    var precio = contenedor.querySelector(".precio").textContent;
+
     //Creamos nuestro objeto para almacenar el producto en el carrito
-    var rin={
+    var rin = {
       codigo: codigo,
       modelo: modelo,
       tipo: tipo,
@@ -60,29 +60,29 @@ botones.forEach(boton =>{
 
     //Buscar si ya hay un producto igual en el carrito parte 1
 
-    let rinEnCarrito=false; //asumimos que no
+    let rinEnCarrito = false; //asumimos que no
     let index; //para guardar su posición si existe
 
-    if (carrito.length>0) {
-      for (let i=0; i< carrito.length; i++){
+    if (carrito.length > 0) {
+      for (let i = 0; i < carrito.length; i++) {
         //si hay un producto con el mismo código cambiamos el estado a true y guardamos la posición
-        if(carrito[i].codigo==rin.codigo) {
-          rinEnCarrito=true;
-          index=i;
-        }        
+        if (carrito[i].codigo == rin.codigo) {
+          rinEnCarrito = true;
+          index = i;
+        }
       }
     }
 
     //Buscar si ya hay un producto igual en el carrito parte 2
 
-    if(rinEnCarrito==false){
+    if (rinEnCarrito == false) {
       //Si no está lo agregamos
       carrito.push(rin);
-    }else{
+    } else {
       //Si existe sumamos +1 a su propiedad cantidad
       carrito[index].cantidad++;
     }
-    
+
     //Al macenamos la info en forma de string en el LS
     localStorage.setItem("carritoLocal", JSON.stringify(carrito));
     actualizarNumProductos(); //Como se agregaron productos debemos actualizar la cuenta del carrito
@@ -97,10 +97,10 @@ botones.forEach(boton =>{
 *############################################################
 */
 
-function actualizarNumProductos(){
-  carritoLS=localStorage.getItem("carritoLocal"); 
-  var productos=0;
-  
+function actualizarNumProductos() {
+  carritoLS = localStorage.getItem("carritoLocal");
+  var productos = 0;
+
   if (carritoLS != null) {
     carrito = JSON.parse(carritoLS);
     //Sumamos las cantidades de cada uno de los porductos en el carrito
@@ -110,7 +110,49 @@ function actualizarNumProductos(){
   }
 
   //Actualizamos la cuenta en el html 
-  var numProductos=document.querySelector("#numero");
-  numProductos.innerHTML="";
-  numProductos.innerHTML=productos;
+  var numProductos = document.querySelector("#numero");
+  numProductos.innerHTML = "";
+  numProductos.innerHTML = productos;
 }
+
+/*
+*############################################################
+*CODIGO PARA HACER FUNCIONALES LOS SLIDES
+*############################################################
+*/
+
+//Obtenemos todos los slides que hay actuales en el documento
+var slides = document.querySelectorAll(".slidebotones");
+//Para cada slide que se ha encontrado se hara lo siguiente
+slides.forEach(slide => {
+  //Obtenemos el padre mas cercano al slide
+  var contendor2 = slide.closest(".contenedor");
+  //Obtenemos los recursos necesarios para hacer funcionales los slides
+  var botonatras = contendor2.querySelector(".anterior");
+  var botonsiguiente = contendor2.querySelector(".siguiente");
+  var imagenes = contendor2.querySelector(".imagenslide");
+  //Obtenemos los elementos para que cada slide cuente con su arreglo dependiendo de los datos que contenga
+  var modeloaux = contendor2.querySelector(".modelo").textContent;
+  var tipoaux = contendor2.querySelector(".tipo").textContent;
+  var arreglo = ["img/Modelos/" + tipoaux + "/" + modeloaux + "/1.jpg", "img/Modelos/" + tipoaux + "/" + modeloaux + "/2.jpg", "img/Modelos/" + tipoaux + "/" + modeloaux + "/3.jpg"];
+  //Para cada slide se iniciara un contador en 0
+  var contador = 0;
+  //Agregamos el evento al boton siguiente para recorrer el arreglo hacia adelante y asignar la nueva imagen
+  botonsiguiente.addEventListener("click", function () {
+    contador++;
+    imagenes.setAttribute("src", arreglo[contador]);
+    if (contador > 2) {
+      contador = 0;
+      imagenes.setAttribute("src", arreglo[contador]);
+    }
+  });
+  //Agregamos el evento al boton siguiente para recorrer el arreglo hacia atras y asignar la nueva imagen
+  botonatras.addEventListener("click", function () {
+    contador++;
+    imagenes.setAttribute("src", arreglo[contador]);
+    if (contador > 2) {
+      contador = 0;
+      imagenes.setAttribute("src", arreglo[contador]);
+    }
+  });
+});
