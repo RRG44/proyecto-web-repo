@@ -104,17 +104,19 @@ function crearCajasCarrito(){
       var rinCaja="";
   
       rinCaja+=`
-      <div class="contenedor">
+      <div class="contenedorCarrito">
         <div class="izquierda">
           <img src="img/Modelos/${rin.tipo}/${rin.modelo}/1.jpg" alt=""></img>
-          <h3 class="modelo">${rin.modelo}</h3>
-          <p class="tipo">${rin.tipo}</p>
-          <p class="precio">${rin.precio}</p>
-          <p class="codigo">${rin.codigo}</p>
+          </div>
+          <div class="centro">
+          <h3 class="modelo">Modelo: ${rin.modelo}</h3>
+          <p class="tipo">Tipo: ${rin.tipo}</p>
+          <p class="precio">Precio $${rin.precio}</p>
+          <p class="codigo">Codigo: ${rin.codigo}</p>
         </div>
         <div class="derecha">
-          <button class="menos">-</button>
           <p class="cantidad">Cantidad: ${rin.cantidad}</p>
+          <button class="menos">-</button>
           <button class="mas">+</button>
           <button class="eliminar">Eliminar del carrito</button>
         </div>
