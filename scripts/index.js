@@ -114,3 +114,45 @@ function actualizarNumProductos(){
   numProductos.innerHTML="";
   numProductos.innerHTML=productos;
 }
+
+/*
+*############################################################
+*CODIGO PARA HACER FUNCIONALES LOS SLIDES
+*############################################################
+*/
+
+//Obtenemos todos los slides que hay actuales en el documento
+var slides = document.querySelectorAll(".slidebotones");
+//Para cada slide que se ha encontrado se hara lo siguiente
+slides.forEach(slide => {
+  //Obtenemos el padre mas cercano al slide
+  var contendor2 = slide.closest(".contenedor");
+  //Obtenemos los recursos necesarios para hacer funcionales los slides
+  var botonatras = contendor2.querySelector(".anterior");
+  var botonsiguiente = contendor2.querySelector(".siguiente");
+  var imagenes = contendor2.querySelector(".imagenslide");
+  //Obtenemos los elementos para que cada slide cuente con su arreglo dependiendo de los datos que contenga
+  var modeloaux = contendor2.querySelector(".modelo").textContent;
+  var tipoaux = contendor2.querySelector(".tipo").textContent;
+  var arreglo = ["img/Modelos/" + tipoaux + "/" + modeloaux + "/1.jpg", "img/Modelos/" + tipoaux + "/" + modeloaux + "/2.jpg", "img/Modelos/" + tipoaux + "/" + modeloaux + "/3.jpg"];
+  //Para cada slide se iniciara un contador en 0
+  var contador = 0;
+  //Agregamos el evento al boton siguiente para recorrer el arreglo hacia adelante y asignar la nueva imagen
+  botonsiguiente.addEventListener("click", function () {
+    contador++;
+    imagenes.setAttribute("src", arreglo[contador]);
+    if (contador > 2) {
+      contador = 0;
+      imagenes.setAttribute("src", arreglo[contador]);
+    }
+  });
+  //Agregamos el evento al boton siguiente para recorrer el arreglo hacia atras y asignar la nueva imagen
+  botonatras.addEventListener("click", function () {
+    contador--;
+    imagenes.setAttribute("src", arreglo[contador]);
+    if (contador < 0) {
+      contador = 2;
+      imagenes.setAttribute("src", arreglo[contador]);
+    }
+  });
+});
