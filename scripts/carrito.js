@@ -102,25 +102,26 @@ function crearCajasCarrito(){
     carrito.forEach(rin =>{
 
       var rinCaja="";
-  
+      
       rinCaja+=`
       <div class="contenedor">
         <div class="izquierda">
           <img src="img/Modelos/${rin.tipo}/${rin.modelo}/1.jpg" alt=""></img>
           </div>
           <div class="centro">
-          <h3 class="modelo">${rin.modelo}</h3>
-          <p class="tipo">${rin.tipo}</p>
-          <p class="precio">${rin.precio}</p>
+          <h3 class="modelo">Modelo: ${rin.modelo}</h3>
+          <p class="tipo">Tipo: ${rin.tipo}</p>
+          <p class="precio">Precio: $${rin.precio}</p>
           <p class="codigo">${rin.codigo}</p>
         </div>
         <div class="derecha">
+        <button class="menos">-</button>
           <p class="cantidad">Cantidad: ${rin.cantidad}</p>
-          <button class="menos">-</button>
           <button class="mas">+</button>
-          <button class="eliminar">Eliminar del carrito</button>
         </div>
+        <div class="eliminarContenedor"><button class="eliminar">Eliminar del carrito</button></div>
       </div>
+      </br>
       `;
       cajas+=rinCaja; //Agregamos la caja a la colección de cajas
     });
