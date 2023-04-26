@@ -9,10 +9,10 @@ Al cargar la página se debe ejecutar la función crearCajasCarrito y actualizar
 *############################################################
 */
 
-function actualizarNumProductos(){
-  carritoLS=localStorage.getItem("carritoLocal"); 
-  var productos=0;
-  
+function actualizarNumProductos() {
+  carritoLS = localStorage.getItem("carritoLocal");
+  var productos = 0;
+
   if (carritoLS != null) {
     carrito = JSON.parse(carritoLS);
     //Sumamos las cantidades de cada uno de los porductos en el carrito
@@ -22,9 +22,9 @@ function actualizarNumProductos(){
   }
 
   //Actualizamos la cuenta en el html 
-  var numProductos=document.querySelector("#etiquetaCarrito");
-  numProductos.innerHTML="";
-  numProductos.innerHTML=productos;
+  var numProductos = document.querySelector("#numero");
+  numProductos.innerHTML = "";
+  numProductos.innerHTML = productos;
   actualizarTotal(); //Actualizamos el precio en el carrito
 }
 
@@ -35,27 +35,27 @@ function actualizarNumProductos(){
 *####################################################
 */
 
-function actualizarTotal(){
+function actualizarTotal() {
 
-  carritoLS=localStorage.getItem("carritoLocal");
-  var precioFinal=0;
+  carritoLS = localStorage.getItem("carritoLocal");
+  var precioFinal = 0;
 
-  if(carritoLS!=null){
+  if (carritoLS != null) {
     carrito = JSON.parse(carritoLS);
     /*
     Calculamos el precio de la compra con ayuda de
     la cantidad y precio de cada producto en el carrito
     */
     carrito.forEach(rin => {
-      precioFinal += rin.cantidad*rin.precio;
+      precioFinal += rin.cantidad * rin.precio;
     });
   }
 
   //Actualizamos el html
-  var contendor=document.querySelector(".total");
-  var total=contendor.querySelector(".total-neto");
-  total.innerHTML="";
-  total.innerHTML="Total neto: $"+precioFinal;
+  var contendor = document.querySelector(".total");
+  var total = contendor.querySelector(".total-neto");
+  total.innerHTML = "";
+  total.innerHTML = "Total neto: MXN$ " + precioFinal;
 }
 
 
@@ -66,14 +66,14 @@ function actualizarTotal(){
 */
 
 //Al único boton lo llamamos y la agregamos una función
-var eliminarCarrito=document.querySelector(".vaciar-carrito");
-eliminarCarrito.addEventListener("click", ()=>{
+var eliminarCarrito = document.querySelector(".vaciar-carrito");
+eliminarCarrito.addEventListener("click", () => {
 
-  var carrito=[];
+  var carrito = [];
 
   //Vaciamos el contenedor del html
-  contendorPrincipal=document.querySelector("#caja-principal");
-  contendorPrincipal.innerHTML="";
+  contendorPrincipal = document.querySelector("#caja-principal");
+  contendorPrincipal.innerHTML = "";
   //Actualizamos el LS con un carrito vacío
   localStorage.setItem("carritoLocal", JSON.stringify(carrito));
   //Actualizamos la cuenta de productos y el precio de la compra
@@ -88,48 +88,57 @@ eliminarCarrito.addEventListener("click", ()=>{
 *##################################################################
 */
 
-function crearCajasCarrito(){
+function crearCajasCarrito() {
 
-  carritoLS=localStorage.getItem("carritoLocal"); 
-  contendorPrincipal=document.querySelector("#caja-principal");
+  carritoLS = localStorage.getItem("carritoLocal");
+  contendorPrincipal = document.querySelector("#caja-principal");
 
-  let cajas=""; //contien todas las cajas de los productos
+  let cajas = ""; //contien todas las cajas de los productos
 
-  if(carritoLS!=null){
+  if (carritoLS != null) {
 
     //Para cada producto vamos a crear una caja personalizada
-    carrito=JSON.parse(carritoLS);
-    carrito.forEach(rin =>{
+    carrito = JSON.parse(carritoLS);
+    carrito.forEach(rin => {
 
-      var rinCaja="";
-      
-      rinCaja+=`
+      var rinCaja = "";
+
+      rinCaja += `
       <div class="contenedor">
-        <div class="izquierda">
-          <img src="img/Modelos/${rin.tipo}/${rin.modelo}/1.jpg" alt=""></img>
-          </div>
-          <div class="centro">
-          <h3 class="modelo">Modelo: ${rin.modelo}</h3>
-          <p class="tipo">Tipo: ${rin.tipo}</p>
-          <p class="precio">Precio: $${rin.precio}</p>
-          <p class="codigo">${rin.codigo}</p>
-        </div>
-        <div class="derecha">
-        <button class="menos">-</button>
-          <p class="cantidad">Cantidad: ${rin.cantidad}</p>
-          <button class="mas">+</button>
-        </div>
-        <div class="eliminarContenedor"><button class="eliminar">Eliminar del carrito</button></div>
-      </div>
-      </br>
+                <div class="modelotitulo">
+                    <p>Modelo:<span class="modelo">${rin.modelo}</span></p>
+                </div>
+                <div class="cuerpomodelo">
+                    <div class="imagen">
+                        <img src="./img/Modelos/${rin.tipo}/${rin.modelo}/1.jpg">
+                    </div>
+                    <div class="informacion">
+                      <p>Tipo:<span class="tipo">${rin.tipo}</span></p>
+                      <p>Precio: MXN$<span class="precio">${rin.precio}</span></p>
+                      <p>Codigo:<span class="codigo">${rin.codigo}</span></p>
+                      <p>Descripcion:<span class="descripcion">${rin.descripcion}</span></p>
+                      <a href="">Ver más detalles</a>
+                    </div>
+                    <div class="cantidadmodelo">
+                        <span class="cantidadtitulo">Cantidad:</span>
+                        <button class="mas"><img src="img/mas.png" alt=""></button>
+                        <span class="cantidad">${rin.cantidad}</span>
+                        <button class="menos"><img src="img/menos.png" alt=""></button>
+                    </div>
+                    <div class="eliminarContenedor">
+                        <button class="eliminar"> Eliminar del carrito<img src="img/basura.png" alt=""> </button>
+                    </div>
+                </div>
+            </div>
+            <br>
       `;
-      cajas+=rinCaja; //Agregamos la caja a la colección de cajas
+      cajas += rinCaja; //Agregamos la caja a la colección de cajas
     });
   }
 
   //Actualizamos el html con las nuevas cajas
   contendorPrincipal.innerHTML = "";
-  contendorPrincipal.innerHTML+=cajas;
+  contendorPrincipal.innerHTML += cajas;
   localStorage.setItem("carritoLocal", JSON.stringify(carrito));
 
   /*
@@ -139,23 +148,23 @@ function crearCajasCarrito(){
   */
 
   //*PARA LOS BOTONES ELIMINAR
-  const botonesEliminar=document.querySelectorAll(".eliminar");
+  const botonesEliminar = document.querySelectorAll(".eliminar");
 
-  botonesEliminar.forEach(boton =>{
-    boton.addEventListener("click", ()=>{
-      carritoLS=localStorage.getItem("carritoLocal");
+  botonesEliminar.forEach(boton => {
+    boton.addEventListener("click", () => {
+      carritoLS = localStorage.getItem("carritoLocal");
 
-      carrito=JSON.parse(carritoLS);
+      carrito = JSON.parse(carritoLS);
 
       //Buscamos el contenedor donde está el botón
       var contenedor = boton.closest(".contenedor");
-        
-      //Vamos a recuperar la información de los productos con ayuda de etiquetas y el contendor
-      var codigo=contenedor.querySelector(".codigo").textContent;
 
-      for (let i=0; i< carrito.length; i++){
+      //Vamos a recuperar la información de los productos con ayuda de etiquetas y el contendor
+      var codigo = contenedor.querySelector(".codigo").textContent;
+
+      for (let i = 0; i < carrito.length; i++) {
         //si hay un producto con el mismo codigo lo eliminamos
-        if(carrito[i].codigo==codigo) {
+        if (carrito[i].codigo == codigo) {
           carrito.splice(i, 1);
         }
       }
@@ -169,23 +178,23 @@ function crearCajasCarrito(){
   });
 
   //*PARA LOS BOTONES MAS (AGREGAN OTRO PRODUCTO DEL MISMO TIPO AL CARRITO)
-  const botonesMas=document.querySelectorAll(".mas");
+  const botonesMas = document.querySelectorAll(".mas");
 
-  botonesMas.forEach(boton =>{
-    boton.addEventListener("click", ()=>{
+  botonesMas.forEach(boton => {
+    boton.addEventListener("click", () => {
 
       //Buscamos el contenedor donde está el botón y su codigo
-      carritoLS=localStorage.getItem("carritoLocal");
-      carrito=JSON.parse(carritoLS);
+      carritoLS = localStorage.getItem("carritoLocal");
+      carrito = JSON.parse(carritoLS);
 
       var contenedor = boton.closest(".contenedor");
 
-      var codigo=contenedor.querySelector(".codigo").textContent;
-      
-      for (let i=0; i< carrito.length; i++){
+      var codigo = contenedor.querySelector(".codigo").textContent;
+
+      for (let i = 0; i < carrito.length; i++) {
         //Buscamos el producto por código y aumentados su cantidad en el carrito
-        if(carrito[i].codigo==codigo) {
-          carrito[i].cantidad+=1;
+        if (carrito[i].codigo == codigo) {
+          carrito[i].cantidad += 1;
         }
       }
 
@@ -198,24 +207,24 @@ function crearCajasCarrito(){
   });
 
   //*PARA LOS BOTONES MAS (AGREGAN OTRO PRODUCTO DEL MISMO TIPO AL CARRITO)
-  const botonesMenos=document.querySelectorAll(".menos");
+  const botonesMenos = document.querySelectorAll(".menos");
 
-  botonesMenos.forEach(boton =>{
-    boton.addEventListener("click", ()=>{
-      
+  botonesMenos.forEach(boton => {
+    boton.addEventListener("click", () => {
+
       //Buscamos el contenedor donde está el botón
-      carritoLS=localStorage.getItem("carritoLocal"); //revisamos el caché
-      carrito=JSON.parse(carritoLS);
+      carritoLS = localStorage.getItem("carritoLocal"); //revisamos el caché
+      carrito = JSON.parse(carritoLS);
 
       var contenedor = boton.closest(".contenedor");
 
-      var codigo=contenedor.querySelector(".codigo").textContent;
-      
-      for (let i=0; i< carrito.length; i++){
+      var codigo = contenedor.querySelector(".codigo").textContent;
+
+      for (let i = 0; i < carrito.length; i++) {
         //Buscamos el producto por código y aumentados su cantidad en el carrito
         //No podemos tener cantidades negativas de productos
-        if(carrito[i].codigo==codigo && carrito[i].cantidad>1) {
-          carrito[i].cantidad-=1;
+        if (carrito[i].codigo == codigo && carrito[i].cantidad > 1) {
+          carrito[i].cantidad -= 1;
         }
       }
 

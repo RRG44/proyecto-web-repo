@@ -6,6 +6,8 @@
   --color3: #000;
   --color4: #fff;
   --color5: #c4c4c4;
+  --color6: #dfdfdf;
+  --color7: #cacaca;
 }
 
 /*////////////////////////////////////////////////////////////////*/
@@ -115,9 +117,6 @@ body {
   font-weight: 600;
 }
 
-/*////////////////////////////////////////////////////////////////*/
-/* Diseño de la caja principal */
-
 #cajaprincipal {
   padding-top: 120px;
   width: 97%;
@@ -125,166 +124,23 @@ body {
   margin-right: 1.5%;
 }
 
-#modelo {
-  max-width: 100%;
-  height: auto;
-}
-
-/*////////////////////////////////////////////////////////////////*/
-/* Diseño del titulo */
 #cajaprincipaltitulo {
   text-align: center;
   margin-top: 0;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
 }
 
-/*////////////////////////////////////////////////////////////////*/
-/* Diseño del indice */
-#cajaprincipalindice {
-  display: flex;
-  flex-direction: column;
-  border-bottom: var(--color3) solid 3px;
-  border-radius: 3px;
-  padding-bottom: 20px;
-}
-
-#cajaprincipalindice h3 {
-  text-align: center;
-  margin-bottom: 10px;
-}
-
-#cajaprincipalsecciones {
-  display: flex;
-  justify-content: space-between;
-}
-
-/*////////////////////////////////////////////////////////////////*/
-/* Diseño de cada seccion */
-.seccion {
-  text-decoration: none;
-}
-
-/* Fondos para las secciones */
-#seccionstreet div {
-  background-image: url(../img/fondostreet.jpg);
-}
-
-#seccionrace div {
-  background-image: url(../img/fondorace.jpg);
-}
-
-#seccionoffroad div {
-  background-image: url(../img/fondooff.jpg);
-}
-
-.seccion div {
-  border-radius: 20px;
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 400px;
-  height: 70px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.seccion div span {
-  display: flex;
-  background-color: var(--color4);
-  height: 30px;
-  width: 100px;
-  align-items: center;
-  justify-content: center;
-  border-radius: 10px;
-  color: var(--color3);
-  font-size: 20px;
-  font-weight: 600;
-}
-
-.seccion:hover div {
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
-  transition: 0.3s;
-}
-
-.seccion:hover span {
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
-  transition: 0.3s;
-  font-size: 22px;
-}
-
-.seccion:active div {
-  box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.5);
-  transition: 0s;
-}
-
-.seccion:active span {
-  text-shadow: none;
-  font-size: 20px;
-  transition: 0s;
-}
-
-/* Diseño para cada modelo */
-.cajaprincipalmodelo {
-  scroll-margin-top: 130px;
-  display: flex;
-  margin-top: 20px;
-  flex-direction: column;
-}
-
-#modelosstreet {
-  background-image: url(../img/fondostreet.jpg);
-}
-
-#modelosrace {
-  background-image: url(../img/fondorace.jpg);
-}
-
-#modelosoffroad {
-  background-image: url(../img/fondooff.jpg);
-}
-
-.modeloencabezado {
-  width: 100%;
-  border-radius: 20px;
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 180px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.modeloencabezado span {
-  display: flex;
-  background-color: var(--color4);
-  height: 60px;
-  width: 600px;
-  align-items: center;
-  justify-content: center;
-  border-radius: 10px;
-  color: var(--color3);
-  font-size: 40px;
-  font-weight: 600;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
-}
-
-.modelos {
-  margin-top: 20px;
-  display: flex;
-  margin-bottom: 20px;
-  justify-content: space-between;
-}
-
-/* Diseño para cada caja de rin */
+/*Diseño de cada caja*/
 .contenedor {
   display: flex;
   flex-direction: column;
   height: 250px;
-  width: 420px;
+  width: 100%;
   background-color: var(--color4);
   border: 1px solid rgba(0, 0, 0, 0.5);
   border-radius: 20px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+  margin-bottom: 20px;
 }
 
 .modelotitulo {
@@ -310,147 +166,226 @@ body {
   display: flex;
 }
 
-.slidebotones {
+.imagen {
   width: 220px;
   display: flex;
   height: 100%;
   align-items: center;
+  margin-left: 40px;
+  margin-right: 40px;
 }
 
-.anterior {
-  display: flex;
+.imagen img {
   height: 100%;
-  width: 10px;
-  justify-content: center;
-  align-items: center;
-  background-color: transparent;
-  border: none;
-}
-
-
-.anterior img {
-  height: 15%;
-  width: 10px;
-}
-
-.anterior:hover {
-  cursor: pointer;
-}
-
-.anterior:hover img {
-  height: 20%;
-  transition: 0.3s;
-}
-
-.anterior:active img {
-  height: 15%;
-  transition: 0.3s;
-}
-
-.slide {
-  width: 190px;
-}
-
-.slide img {
   width: 100%;
 }
 
-.siguiente {
-  display: flex;
-  height: 100%;
-  width: 10px;
-  justify-content: center;
-  align-items: center;
-  background-color: transparent;
-  border: none;
-}
-
-.siguiente img {
-  height: 15%;
-  width: 10px;
-}
-
-.siguiente:hover {
-  cursor: pointer;
-}
-
-.siguiente:hover img {
-  height: 20%;
-  transition: 0.3s;
-}
-
-.siguiente:active img {
-  height: 15%;
-  transition: 0.3s;
-}
-
-.cuerpoinformacion {
+.informacion {
   display: flex;
   flex-direction: column;
-  width: 200px;
-}
-
-.conceptos {
-  margin-top: 10px;
+  width: 50%;
+  height: 100%;
   font-weight: bold;
+  justify-content: center;
+  font-size: 18px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
-.conceptos span {
-  margin-left: 5px;
-  color: #000;
-}
-
-.conceptos p {
+.informacion p {
   color: var(--color1);
   margin: 0;
+  margin-top: 10px;
   margin-bottom: 10px;
 }
 
-.modeloboton {
-  margin-top: 0;
-  width: 100%;
-  display: flex;
-  height: 40px;
-  justify-content: center;
-  align-items: center;
-}
-
-.modeloboton button {
-  display: flex;
-  height: 25px;
-  width: 150px;
-  background-color: var(--color1);
-  border: none;
-  border-radius: 5px;
-  justify-content: center;
-  align-items: center;
-}
-
-.modeloboton button img {
-  height: 20px;
-}
-
-.modeloboton button span {
+.informacion span {
   margin-left: 10px;
-  font-family: "Gruppo";
+  color: #000;
+}
+
+.informacion a {
+  text-decoration: none;
+  background-color: var(--color1);
+  width: 200px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
   color: var(--color4);
-  font-weight: bold;
-  font-size: 11px;
+  font-size: 16px;
+  margin-top: 5px;
+  align-self: center;
 }
 
-.modeloboton button:hover {
+.informacion a:hover {
+  font-size: 18px;
+  text-decoration: underline;
+  transition: 0.3s;
+}
+
+.cantidadmodelo {
+  width: 100px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.cantidadtitulo {
+  color: var(--color1);
+  font-weight: bolder;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.cantidadmodelo button {
+  height: 30px;
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background-color: var(--color6);
+}
+
+.mas {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.menos {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.cantidadmodelo button img {
+  height: 15px;
+}
+
+.cantidadmodelo button:hover {
   cursor: pointer;
+  background-color: var(--color7);
 }
 
-.modeloboton button:hover span {
-  font-size: 13px;
+.cantidadmodelo button:hover img {
+  height: 20px;
   transition: 0.3s;
 }
 
-.modeloboton button:active span {
-  font-size: 11px;
+.cantidadmodelo button:active {
+  background-color: var(--color5);
+}
+
+.cantidadmodelo button:active img {
+  height: 15px;
+  transition: 0.2s;
+}
+
+.cantidad {
+  height: 50px;
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color6);
+  margin-top: 4px;
+  margin-bottom: 4px;
+  font-size: 30px;
+  font-weight: bolder;
+}
+
+.eliminarContenedor {
+  width: 120px;
+  margin-left: 40px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.eliminar {
+  width: 100%;
+  height: 70%;
+  background-color: var(--color1);
+  border-radius: 10px;
+  border: none;
+  font-family: 'Gruppo';
+  font-size: 18px;
+  color: var(--color4);
+  font-weight: bolder;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.eliminar img {
+  margin-top: 20px;
+  width: 60px;
+}
+
+.eliminar:hover {
+  cursor: pointer;
+  font-size: 20px;
   transition: 0.3s;
 }
+
+.eliminar:active {
+  font-size: 18px;
+  transition: 0.2s;
+}
+
+/*Diseño del total*/
+.total {
+  border-top: 3px solid var(--color3);
+  ;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.total p {
+  margin: 0;
+  margin-bottom: 10px;
+  font-size: 25px;
+  font-weight: bolder;
+  margin-top: 40px;
+}
+
+.total button {
+  background-color: var(--color1);
+  width: 200px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  color: var(--color4);
+  font-size: 18px;
+  margin-top: 5px;
+  align-self: center;
+  border: none;
+  padding: 10px;
+  font-family: 'Gruppo';
+  font-weight: bolder;
+}
+
+.total button:hover {
+  cursor: pointer;
+  font-size: 20px;
+  transition: 0.3s;
+}
+
+.total button:active {
+  font-size: 18px;
+  transition: 0.3s;
+}
+
 
 /*////////////////////////////////////////////////////////////////*/
 /* Insertar debajo el diseño del footer */
