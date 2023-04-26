@@ -48,6 +48,7 @@ botones.forEach(boton =>{
     var modelo=contenedor.querySelector(".modelo").textContent;
     var tipo=contenedor.querySelector(".tipo").textContent;
     var precio=contenedor.querySelector(".precio").textContent;
+    var descripcion = contenedor.querySelector(".descripcion").textContent;
     
     //Creamos nuestro objeto para almacenar el producto en el carrito
     var rin={
@@ -55,6 +56,7 @@ botones.forEach(boton =>{
       modelo: modelo,
       tipo: tipo,
       precio: precio,
+      descripcion: descripcion,
       cantidad: 1
     };
 
